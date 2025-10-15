@@ -3,7 +3,7 @@ import { IBook, IBookForm } from './ibook.interface';
 import { InjectionToken } from '@angular/core';
 
 export interface IBookService {
-  getBooks(): Observable<IBook[] | undefined>;
+  getBooks(): Observable<IBook[]>;
   addBook(book: IBookForm | IBook): Observable<IBook>;
   updateBook(id: number, book: IBookForm): Observable<IBook>;
   deleteBook(id: number): Observable<void>;

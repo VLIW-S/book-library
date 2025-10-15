@@ -59,7 +59,7 @@ export class InMemoryBookService implements IBookService {
   private nextId = Math.max(...this.books().map(b => b.id), 0) + 1;
   private delayMs = environment.apiDelayMs;
 
-  getBooks(): Observable<IBook[] | undefined> {
+  getBooks(): Observable<IBook[]> {
     return of([...this.books()]).pipe(delay(this.delayMs));
   }
 

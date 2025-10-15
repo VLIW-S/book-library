@@ -12,7 +12,7 @@ export class HttpBookService implements IBookService {
   private readonly apiUrl = environment.apiUrl;
   private httpClient = inject(HttpClient);
 
-  getBooks(): Observable<IBook[] | undefined> {
+  getBooks(): Observable<IBook[]> {
     return this.httpClient.get<IBook[]>(this.apiUrl);
   }
 

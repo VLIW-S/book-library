@@ -5,6 +5,7 @@ import { IBook, IBookForm } from '../../core/models/ibook.interface';
 import { NotificationService } from '../../core/services/notification/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IBOOK_SERVICE_TOKEN, IBookService } from '../../core/models/ibook-service.interface';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 export interface BookState {
   books: IBook[];
@@ -46,7 +47,8 @@ export const BookStore = signalStore(
     (
       store,
       bookService = inject(IBOOK_SERVICE_TOKEN) as IBookService,
-      notificationService = inject(NotificationService)
+      notificationService = inject(NotificationService),
+      logerService = inject(LoggerService)
     ) => ({
       // Updating the filter text
       updateFilter: (filterText: string) => {
@@ -62,6 +64,7 @@ export const BookStore = signalStore(
           .subscribe({
             next: (books) => {
               patchState(store, { books, isLoading: false });
+              logerService.log('Books loaded successfully', 'success');
             },
             error: (err: Error | HttpErrorResponse) => {
               patchState(store, { error: err.message, isLoading: false });
@@ -87,6 +90,7 @@ export const BookStore = signalStore(
                 `Book "${newBook.title}" added successfully!`,
                 'success'
               );
+              logerService.log(`Book "${newBook.title}" added successfully!`, 'success');
             },
             error: (err: Error | HttpErrorResponse) => {
               patchState(store, { error: err.message, isLoading: false });
@@ -109,6 +113,7 @@ export const BookStore = signalStore(
                 isLoading: false,
               });
               notificationService.openSnackBar(`Book "${title}" deleted successfully.`, 'success');
+              logerService.log(`Book "${title}" deleted successfully.`, 'success');
             },
             error: (err: Error | HttpErrorResponse) => {
               patchState(store, { error: err.message, isLoading: false });
@@ -132,6 +137,7 @@ export const BookStore = signalStore(
                 `Book "${updatedBook.title}" updated successfully.`,
                 'success'
               );
+              logerService.log(`Book "${updatedBook.title}" updated successfully.`, 'success');
             },
             error: (err: Error | HttpErrorResponse) => {
               patchState(store, { error: err.message, isLoading: false });
