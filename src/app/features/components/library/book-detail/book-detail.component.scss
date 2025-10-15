@@ -1,0 +1,39 @@
+.form {
+  margin: 0 auto;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    padding: 12px 32px;
+    border-radius: 8px;
+    margin-right: 12px;
+    margin-top: 8px;
+    transition: all 0.2s ease;
+
+    &.submit {
+      background: #667eea;
+      color: white;
+
+      &:hover:not(:disabled) {
+        background: #5568d3;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      }
+
+      &:disabled {
+        background: #cbd5e0;
+        cursor: not-allowed;
+      }
+    }
+
+    &.cancel {
+      background: #edf2f7;
+      color: #4a5568;
+
+      &:hover {
+        background: #e2e8f0;
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Confirm Deletion</h2>
+<mat-dialog-content>
+  <h4>
+    Are you sure you want to delete the book: "{{ data.title }}"?
+  </h4>
+  <p>To delete, enter the book title below:</p>
+  <mat-form-field>
+    <input matInput #titleInput="ngModel" [(ngModel)]="textConfirm" cdkFocusInitial placeholder="Title" />
+  </mat-form-field>
+  @if (textConfirm() && textConfirm().trim().toLowerCase() !== data.title.toLowerCase() && titleInput.touched) {
+  <mat-error>Not matching title</mat-error>
+  }
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton [mat-dialog-close]="false">Cancel</button>
+  <button
+    matButton
+    [mat-dialog-close]="true"
+    [disabled]="textConfirm().trim().toLowerCase() !== data.title.toLowerCase()"
+  >
+    Delete
+  </button>
+</mat-dialog-actions>

@@ -4,7 +4,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { IBook, IBookForm } from '../../models/ibook.interface';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { globalErrorInterceptor } from '../../interceptors/global-error.interceptor';
+import { HttpErrorInterceptor } from '../../interceptors/http-error.interceptor';
 import { environment } from '../../../environments/environment';
 
 describe('HttpBookService', () => {
@@ -18,7 +18,7 @@ describe('HttpBookService', () => {
       imports: [],
       providers: [
         HttpBookService,
-        provideHttpClient(withInterceptors([globalErrorInterceptor])),
+        provideHttpClient(withInterceptors([HttpErrorInterceptor])),
         provideHttpClientTesting(),
         provideZonelessChangeDetection(),
       ],

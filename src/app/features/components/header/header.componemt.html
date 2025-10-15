@@ -1,0 +1,9 @@
+<div class="header">
+  <h2>{{ title() }}</h2>
+
+  @if (actionLink() && actionLabel()) {
+  <button matButton="filled" [routerLink]="actionLink()">
+    {{ actionLabel() }}
+  </button>
+  }
+</div>

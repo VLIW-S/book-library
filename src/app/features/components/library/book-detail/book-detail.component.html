@@ -1,0 +1,59 @@
+<div class="container">
+  <app-header [title]="isEditMode ? 'Edit Book' : 'Add New Book'" />
+
+  <form class="form" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput type="text" formControlName="title" placeholder="Title" />
+        @if (bookForm.controls.title.hasError('required')) {
+        <mat-error>Title is<strong> required</strong></mat-error>
+        }
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Author</mat-label>
+        <input matInput type="text" formControlName="author" placeholder="Author" />
+        @if (bookForm.controls.author.hasError('required') ) {
+        <mat-error>Author is<strong> required</strong></mat-error>
+        }
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Year</mat-label>
+        <input matInput type="number" formControlName="year" placeholder="Year" />
+        @if (bookForm.controls.year.hasError('required')) {
+        <mat-error>Year is<strong> required</strong></mat-error>
+        } @if (bookForm.controls.year.hasError('min')) {
+        <mat-error>Year must be at least <strong>1</strong>.</mat-error>
+        } @if (bookForm.controls.year.hasError('max')) {
+        <mat-error
+          >Year cannot be more than <strong>{{ currentYear }}</strong
+          >.</mat-error
+        >
+        }
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Genre</mat-label>
+        <input matInput type="text" formControlName="genre" placeholder="Genre" />
+        @if (bookForm.controls.genre.hasError('required')) {
+        <mat-error>Genre is<strong> required</strong></mat-error>
+        }
+      </mat-form-field>
+    </p>
+
+    <button
+      matButton="filled"
+      class="submit"
+      type="submit"
+      [disabled]="bookForm.invalid || isLoading()"
+    >
+      {{ isLoading() ? 'Saving...' : isEditMode ? 'Save Changes' : 'Add Book' }}
+    </button>
+    <button matButton class="cancel" (click)="onCancel()">Cancel</button>
+  </form>
+</div>

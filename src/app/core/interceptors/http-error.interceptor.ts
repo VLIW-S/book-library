@@ -4,7 +4,7 @@ import { catchError, throwError } from 'rxjs';
 import { LoggerService } from '../services/logger/logger.service';
 import { NotificationService } from '../services/notification/notification.service';
 
-export const globalErrorInterceptor: HttpInterceptorFn = (req, next) => {
+export const HttpErrorInterceptor: HttpInterceptorFn = (req, next) => {
   const notificationService = inject(NotificationService);
   const logger = inject(LoggerService);
 
